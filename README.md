@@ -1,26 +1,23 @@
-<div align="center">
-  <img src="./public/assets/DevSecOps.png" alt="Logo" width="100%" height="100%">
-
-  <br>
-  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
-    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
-  </a>
-</div>
-
-<br />
-
-<div align="center">
-  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Home Page</p>
-</div>
-
-
-
 # Deploy Netflix Clone on Cloud using Jenkins - DevSecOps Project!
+
+![alt text](image-5.png)
+
+
+### Workflow
+
+* Create an EC2 instance and deploy the app locally using the docker container
+* Once app running, we add the security using Sonarqube and Trivy 
+* Once that is done, automate the process using CI/CD pipeline using the CI/CD tool Jenkins. This is going to automate the process of creation of image, adding the security and uploading on dockerHub.
+* Once pipelining done, we will monitor the process using prometheus and Grafana. We will monitor the EC2 instance and Jenkins to monitor cpu ram successful and unsuccessful jobs. 
+* For every notification we will get an email using SMTP. 8 
+* Then after automating, we will deploy the app on Kubernetes using argoCD.
+
 
 ### **Phase 1: Initial Setup and Deployment**
 
 **Step 1: Launch EC2 (Ubuntu 22.04):**
+
+![EC2Instances](image.png)
 
 - Provision an EC2 instance on AWS with Ubuntu 22.04.
 - Connect to the instance using SSH.
@@ -63,6 +60,8 @@ It will show an error cause you need API key
 
 **Step 4: Get the API Key:**
 
+![TMDB_API](image-1.png)
+
 - Open a web browser and navigate to TMDB (The Movie Database) website.
 - Click on "Login" and create an account.
 - Once logged in, go to your profile and select "Settings."
@@ -77,6 +76,8 @@ docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix .
 ```
 
 **Phase 2: Security**
+
+![Sonarqube](image-2.png)
 
 1. **Install SonarQube and Trivy:**
     - Install SonarQube and Trivy on the EC2 instance to scan for vulnerabilities.
@@ -112,6 +113,8 @@ docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix .
 
 **Phase 3: CI/CD Setup**
 
+![Pipeline(Jenkins)](image-3.png)
+
 1. **Install Jenkins for Automation:**
     - Install Jenkins on the EC2 instance to automate deployment:
     Install Java
@@ -141,6 +144,8 @@ docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix .
         publicIp:8080
         
 2. **Install Necessary Plugins in Jenkins:**
+
+![Jenkins](image-4.png)
 
 Goto Manage Jenkins →Plugins → Available Plugins →
 
@@ -358,6 +363,10 @@ sudo systemctl restart jenkins
 
 **Phase 4: Monitoring**
 
+![Prometheus](image-8.png)
+
+![NodeExporter](image-9.png)
+
 1. **Install Prometheus and Grafana:**
 
    Set up Prometheus and Grafana to monitor your application.
@@ -558,6 +567,8 @@ sudo systemctl restart jenkins
 ####Grafana
 
 **Install Grafana on Ubuntu 22.04 and Set it up to Work with Prometheus**
+
+![Grafana(Jemnkins)](image-7.png)
 
 **Step 1: Install Dependencies:**
 
